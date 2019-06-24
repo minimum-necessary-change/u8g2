@@ -72,7 +72,7 @@ struct controller
   unsigned com;
   char *note;
   unsigned is_generate_u8g2_class;	/* currently not used, instead conrolled by COM_UART */
-  struct display display_list[10];	/* usually not used completly, but space does not matter much here */  
+  struct display display_list[16];	/* usually not used completly, but space does not matter much here */  
 };
 
 /* issue #649 */
@@ -201,7 +201,7 @@ struct controller controller_list[] =
     }
   },
   {
-    "sh1107", 	 8, 	16, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_ssd13xx_i2c", "i2c", COM_I2C,
+    "sh1107", 	 8, 	16, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_ssd13xx_fast_i2c", "i2c", COM_I2C,
     "Not tested", /* is_generate_u8g2_class= */ 1,
     {
       { "64x128" },
@@ -218,7 +218,7 @@ struct controller controller_list[] =
     }
   },
   {
-    "sh1107", 	12, 	12, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_ssd13xx_i2c", "i2c", COM_I2C,
+    "sh1107", 	12, 	12, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_ssd13xx_fast_i2c", "i2c", COM_I2C,
     "Not tested", /* is_generate_u8g2_class= */ 1,
     {
       { "seeed_96x96" },
@@ -228,19 +228,21 @@ struct controller controller_list[] =
 
    {
     "sh1107", 	 16, 	16, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_001", "", COM_4WSPI|COM_3WSPI|COM_6800|COM_8080|COM_8080,
-    "Not tested", /* is_generate_u8g2_class= */ 1,
+    "", /* is_generate_u8g2_class= */ 1,
     {
-      { "128x128" },
-      { "pimoroni_128x128" },
+      { "128x128" },				// not tested
+      { "pimoroni_128x128" },		// not tested
+      { "seeed_128x128" },		// in lab
       { NULL }
     }
   },
   {
-    "sh1107", 	 16, 	16, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_ssd13xx_i2c", "i2c", COM_I2C,
-    "Not tested", /* is_generate_u8g2_class= */ 1,
+    "sh1107", 	 16, 	16, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_ssd13xx_fast_i2c", "i2c", COM_I2C,
+    "", /* is_generate_u8g2_class= */ 1,
     {
-      { "128x128" },
-      { "pimoroni_128x128" },
+      { "128x128" },				// not tested
+      { "pimoroni_128x128" },		// not tested
+      { "seeed_128x128" },		// in lab
       { NULL }
     }
   },
@@ -405,6 +407,25 @@ struct controller controller_list[] =
     }
   },
 
+  /* https://github.com/olikraus/u8g2/issues/919 */
+  {
+    "ssd1316", 	16, 	4, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_001", "", COM_4WSPI|COM_6800|COM_8080,
+    "", /* is_generate_u8g2_class= */ 1,
+    {
+      { "128x32" },
+      { NULL }
+    }
+  },
+  {
+    "ssd1316", 	16, 	4, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_ssd13xx_i2c", "i2c", COM_I2C,
+    "", /* is_generate_u8g2_class= */ 1,
+    {
+      { "128x32" },
+      { NULL }
+    }
+  },
+  
+
   {
     "ssd1317", 	12, 	12, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_001", "", COM_4WSPI|COM_6800|COM_8080,
     "", /* is_generate_u8g2_class= */ 1,
@@ -519,6 +540,7 @@ struct controller controller_list[] =
     {
       { "ea_w128128" },
       { "midas_128x128" },
+      { "ws_128x128" },
       { NULL }
     }
   },
@@ -528,6 +550,7 @@ struct controller controller_list[] =
     {
       { "ea_w128128" },
       { "midas_128x128" },
+      { "ws_128x128" },
       { NULL }
     }
   },  
@@ -818,6 +841,33 @@ struct controller controller_list[] =
     }
   },  
   
+  {
+    "uc1611", 	20, 	20, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_001", "", COM_4WSPI|COM_3WSPI|COM_6800|COM_8080,
+    "use CS0 as chips select", /* is_generate_u8g2_class= */ 1,
+    {
+      { "cg160160" },
+      { NULL }
+    }
+  },  
+  {
+    "uc1611", 	20, 	20, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_uc16xx_i2c", "i2c", COM_I2C,
+    "", /* is_generate_u8g2_class= */ 1,
+    {
+      { "cg160160" },
+      { NULL }
+    }
+  },  
+  
+
+  {
+    "st7511", 	40, 	30, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_011", "", COM_4WSPI|COM_3WSPI|COM_6800|COM_8080,
+    "", /* is_generate_u8g2_class= */ 1,
+    {
+      { "avd_320x240" },		/* 320x240 */
+      { NULL }
+    }
+  },  
+  
 #ifdef NOTUSED
   {
     "uc1617", 	16, 	16, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_001", "", COM_4WSPI|COM_3WSPI,
@@ -842,6 +892,7 @@ struct controller controller_list[] =
     "", /* is_generate_u8g2_class= */ 1,
     {
       { "ea_dogm128" },
+      { "lm6063" },	/* https://github.com/olikraus/u8g2/issues/893 */
       { "64128n" },       
       { "zolen_128x64" },
       { "lm6059" },
@@ -966,6 +1017,7 @@ struct controller controller_list[] =
     "", /* is_generate_u8g2_class= */ 1,
     {
       { "jlx256128" },
+      { "wo256x128" },
       { NULL }
     },
   },
@@ -977,6 +1029,7 @@ struct controller controller_list[] =
     "", /* is_generate_u8g2_class= */ 1,
     {
       { "jlx256128" },
+      { "wo256x128" },
       { NULL }
     }
   },  
@@ -986,6 +1039,7 @@ struct controller controller_list[] =
     "", /* is_generate_u8g2_class= */ 1,
     {
       { "jlx256160" },
+      { "jlx256160m" },
       { "jlx256160_alt" },
       { NULL }
     },
@@ -998,6 +1052,8 @@ struct controller controller_list[] =
     "", /* is_generate_u8g2_class= */ 1,
     {
       { "jlx256160" },
+      { "jlx256160m" },
+      { "jlx256160_alt" },
       { NULL }
     }
   },  
@@ -1073,6 +1129,25 @@ struct controller controller_list[] =
     },
   },
 
+    {
+    "st75320", 		40, 	30, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_011", "", COM_4WSPI|COM_3WSPI|COM_6800|COM_8080,
+    "", /* is_generate_u8g2_class= */ 1,
+    {
+      { "jlx320240" },
+      { NULL }
+    },
+  },
+  
+  {
+    "st75320", 		40, 	30, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_st75256_i2c", "i2c", COM_I2C,
+    "", /* is_generate_u8g2_class= */ 1,
+    {
+      { "jlx320240" },
+      { NULL }
+    },
+  },
+  
+  
   {
     "nt7534", 		16, 	8, 	"u8g2_ll_hvline_vertical_top_lsb", "u8x8_cad_001", "", COM_4WSPI|COM_6800|COM_8080,
     "", /* is_generate_u8g2_class= */ 1,
